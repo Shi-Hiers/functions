@@ -38,25 +38,3 @@ def calculate_amortization(loan_amount, term_years, interest_rate):
     monthly_payment = loan_amount * monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** -number_of_payments)
 
     return monthly_payment
-
-
-# Test cases for validation
-
-if __name__ == "__main__":
-    # Test calculate_grade function with different number grades
-    print("Testing calculate_grade function:")
-    print(f"Grade for 95: {calculate_grade(95)}")  # Expected output: A
-    print(f"Grade for 85: {calculate_grade(85)}")  # Expected output: B
-    print(f"Grade for 75: {calculate_grade(75)}")  # Expected output: C
-    print(f"Grade for 65: {calculate_grade(65)}")  # Expected output: D
-    print(f"Grade for 50: {calculate_grade(50)}")  # Expected output: F
-    print(f"Invalid input (abc): {calculate_grade('abc')}")  # Expected output: Invalid grade input
-
-    # Test calculate_amortization function with sample loan data
-    print("\nTesting calculate_amortization function:")
-    loan_amount = 100000  # $100,000 loan
-    term_years = 30  # 30 years
-    interest_rate = 5.0  # 5% annual interest rate
-
-    monthly_payment = calculate_amortization(loan_amount, term_years, interest_rate)
-    print(f"Monthly payment for a $100,000 loan over 30 years at 5% interest: {monthly_payment:.2f}")  # Expected output: Monthly payment
