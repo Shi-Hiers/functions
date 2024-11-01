@@ -23,18 +23,36 @@ def calculate_grade(number_grade):
 
 # create a function that calculates the loan amortization
 def calculate_amortization(loan_amount, term_years, interest_rate):
-    # Convert inputs to numeric types (float for loan_amount and interest_rate, int for term_years)
     loan_amount = float(loan_amount)
     term_years = int(term_years)
     interest_rate = float(interest_rate)
-
-    # Calculate the monthly interest rate
     monthly_interest_rate = interest_rate / 12 / 100
-
-    # Calculate the number of payments (in months)
     number_of_payments = term_years * 12
-
-    # Calculate the monthly payment using the amortization formula
     monthly_payment = loan_amount * monthly_interest_rate / (1 - (1 + monthly_interest_rate) ** -number_of_payments)
-
     return monthly_payment
+
+# New function for detailed amortization schedule
+def generate_amortization_schedule(loan_amount, interest_rate, loan_term_years):
+    loan_term_months = loan_term_years * 12
+    monthly_interest_rate = interest_rate / 12 / 100
+    monthly_payment = calculate_amortization(loan_amount, loan_term_years, interest_rate)
+    loan_amortization_list = []
+
+    for i in range(1, loan_term_months + 1):
+        interest_paid = loan_amount * monthly_interest_rate
+        principal_paid = monthly_payment - interest_paid
+        remaining_balance = loan_amount - principal_paid
+
+        loan_amortization_list.append({
+            'month': i,
+            'starting_balance': loan_amount,
+            'interest_paid': interest_paid,
+            'principal_paid': principal_paid,
+            'monthly_payment': monthly_payment,
+            'remaining_balance': remaining_balance
+        })
+
+        loan_amount = remaining_balance
+
+    return loan_amortization_list
+
